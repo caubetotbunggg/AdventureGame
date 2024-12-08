@@ -17,16 +17,16 @@ public abstract class BattleLocation extends Location {
     public boolean onLocation() {
         int rndMonster = this.randomMonsterNumber();
         System.out.println("#####################################");
-        System.out.println("Şu an buradasınız: " + this.getName());
-        System.out.println(this.getMonster().getName() + " kokunu aldı. Dikkatli olmalısın.");
-        System.out.println("Burada " + rndMonster + " " + this.getMonster().getName() + " yaşıyor.");
+        System.out.println("Bạn hiện đang ở đây: " + this.getName());
+        System.out.println(this.getMonster().getName() + " Anh ấy ngửi thấy mùi của bạn. Bạn phải cẩn thận.");
+        System.out.println("Con " + rndMonster + " " + this.getMonster().getName() + " vẫn còn sống.");
         System.out.println("#####################################");
-        System.out.println("SAVAŞ ya da GERİ ÇEKİL :");
+        System.out.println("CHIẾN ĐẤU hoặc rút lui :");
         String select = input.nextLine();
         select = select.toLowerCase().replace(" ", "");
-        if (select.equals("savaş") || select.equals("savas")) {
+        if (select.equals("chiến tranh") || select.equals("chiến tranh")) {
             if (combat(rndMonster)) {
-                System.out.println(this.getName() + " canavarlardan temizlendi.");
+                System.out.println(this.getName() + " đã sạch quái vật.");
                 return true;
             }
         }
@@ -42,28 +42,28 @@ public abstract class BattleLocation extends Location {
             this.playerStatus();
             this.monsterStatus(i);
             while (this.getPlayer().getHealth() > 0 && this.getMonster().getHealth() > 0) {
-                System.out.println("SALDIR veya KAÇ : ");
+                System.out.println("TẤN CÔNG hoặc CHUYẾN BAY: ");
                 String choice = input.nextLine();
                 choice = choice.toLowerCase().trim().replace(" ", "");
-                if (choice.equals("saldır") || choice.equals("saldir")) {
+                if (choice.equals("tấn công") || choice.equals("tấn công")) {
                     int playerHealth = this.getPlayer().getHealth();
                     int monsterHealth = this.getMonster().getHealth();
                     int playerAttack = this.getPlayer().getTotalDamage();
                     int monsterAttack = this.getMonster().getDamage();
-                    System.out.println("Canavara saldırdın !");
+                    System.out.println("Bạn đã tấn công quái vật !");
                     this.getMonster().setHealth(monsterHealth - playerAttack);
                     afterHit();
                     if (this.getMonster().getHealth() > 0) {
-                        System.out.println("Canavara sana saldırdı !");
+                        System.out.println("Quái vật tấn công bạn !");
                         int playerBlock = this.getPlayer().getInventory().getArmor().getBlock();
                         monsterAttack = monsterAttack - playerBlock;
                         if (monsterAttack < 0) {
                             monsterAttack = 0;
                         }
                         if (playerBlock > 0) {
-                            System.out.println("Canavar saldırısı '" + playerBlock + "' bloklandı.");
+                            System.out.println("cuộc tấn công quái vật '" + playerBlock + "' bị chặn.");
                         } else {
-                            System.out.println("Zırhın yok, saldırı bloklanamadı.");
+                            System.out.println("Bạn không có áo giáp, đòn tấn công không thể bị chặn.");
                         }
                         this.getPlayer().setHealth(playerHealth - monsterAttack);
                         afterHit();
@@ -73,9 +73,9 @@ public abstract class BattleLocation extends Location {
                 }
             }
             if (this.getMonster().getHealth() <= 0) {
-                System.out.println(i + ". " + this.getMonster().getName() + "öldürüldü.");
+                System.out.println(i + ". " + this.getMonster().getName() + "đã bị giết.");
                 this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getMonster().getAward());
-                System.out.println("Elde edilen ganimet: " + this.getMonster().getAward() + " para");
+                System.out.println("Chiến lợi phẩm thu được: " + this.getMonster().getAward() + " ĐẾN");
             } else {
                 return false;
             }
@@ -85,22 +85,22 @@ public abstract class BattleLocation extends Location {
 
     public void playerStatus() {
         System.out.println("****************************************");
-        System.out.println(this.getPlayer().getCharacterName() + " Durumu:");
-        System.out.println("Sağlık : " + this.getPlayer().getHealth());
-        System.out.println("Saldırı gücü : " + this.getPlayer().getTotalDamage());
-        System.out.println("Savunma gücü : " + this.getPlayer().getInventory().getArmor().getBlock());
+        System.out.println(this.getPlayer().getCharacterName() + "Trạng thái:");
+        System.out.println("Sức khỏe : " + this.getPlayer().getHealth());
+        System.out.println("sức mạnh tấn công : " + this.getPlayer().getTotalDamage());
+        System.out.println("sức phòng thủ : " + this.getPlayer().getInventory().getArmor().getBlock());
     }
 
     public void monsterStatus(int i) {
         System.out.println("****************************************");
-        System.out.println(i + ". " + this.getMonster().getName() + " Durumu:");
-        System.out.println(this.getMonster().getName() + " canı :" + this.getMonster().getHealth());
-        System.out.println("Saldırı gücü : " + this.getMonster().getDamage());
+        System.out.println(i + ". " + this.getMonster().getName() + " Trạng thái:");
+        System.out.println(this.getMonster().getName() + " nhân vật phản diện :" + this.getMonster().getHealth());
+        System.out.println("sức mạnh tấn công : " + this.getMonster().getDamage());
     }
 
     public void afterHit() {
-        System.out.println("Canınız: " + this.getPlayer().getHealth());
-        System.out.println(this.getMonster().getName() + " canı :" + this.getMonster().getHealth());
+        System.out.println("bạn thân mến: " + this.getPlayer().getHealth());
+        System.out.println(this.getMonster().getName() + " nhân vật phản diện :" + this.getMonster().getHealth());
         System.out.println();
     }
 

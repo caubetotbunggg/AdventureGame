@@ -18,15 +18,15 @@ public class Player {
     public void selectChar() {
         Character[] charList = {new Samurai(), new Archer(), new Chevalier()};
         System.out.println("----------------------------------------");
-        System.out.println("Şimdi bir karakter seçmelisin... ");
+        System.out.println("Hay chọn một nhân vật... ");
         for (Character c : charList) {
-            System.out.println(c.getName() + " (Hasar: " +
-                    c.getDamage() + ", Sağlık: " +
-                    c.getHealth() + ", Para: " +
+            System.out.println(c.getName() + " (Hư hại: " +
+                    c.getDamage() + ", Sức khỏe: " +
+                    c.getHealth() + ", Gia tri: " +
                     c.getMoney() + ")");
         }
         System.out.println("----------------------------------------");
-        System.out.println("Samuray - 1 \nOkçu - 2 \nŞövalye - 3 \nŞimdi bir rakam söyle: ");
+        System.out.println("Samurai - 1 \nVampire - 2 \nChevalier - 3 \nChonmột con số : ");
         int choice = input.nextInt();
 
         switch (choice) {
@@ -40,7 +40,7 @@ public class Player {
                 initPlayer(new Chevalier());
                 break;
             default:
-                System.out.println("Yanlış karakter seçtin. Seni yine de samuray kabul edeceğiz!");
+                System.out.println("Bạn đã chọn sai nhân vật. Chúng tôi vẫn sẽ chấp nhận bạn là một samurai!");
                 initPlayer(new Samurai());
         }
     }
@@ -54,12 +54,12 @@ public class Player {
     }
 
     public void printInfo() {
-        System.out.println(this.getName() + " -" + this.getCharacterName() + "-" + " (Silahınız: " +
-                this.getInventory().getGun().getName() + ", Saldırı gücü: " +
-                this.getTotalDamage() + ", Zırhınız: " +
-                this.getInventory().getArmor().getName() + ", Bloklama gücü: " +
-                this.getInventory().getArmor().getBlock() + ", Sağlık durumu: " +
-                this.getHealth() + ", Para durumu: " +
+        System.out.println(this.getName() + " -" + this.getCharacterName() + "-" + " (súng của bạn: " +
+                this.getInventory().getGun().getName() + ", sức mạnh tấn công: " +
+                this.getTotalDamage() + ", áo giáp của bạn: " +
+                this.getInventory().getArmor().getName() + ", Sức mạnh chặn: " +
+                this.getInventory().getArmor().getBlock() + ", Tình trạng sức khỏe: " +
+                this.getHealth() + ", tình hình tiền bạc: " +
                 this.getMoney() + ")");
     }
 
